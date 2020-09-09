@@ -17,10 +17,16 @@ export default class FirstScreen extends Component{
         }
         
     }
+     page1()
+     {
+        this.setState({
+           page:this.state.page+1
+        })
+        console.log("page",this.state.page+1)
+    }
     Api(){
-       // const { page,dataSource } = this.state;
-       // console.log("page",page)
-        fetch("https://hn.algolia.com/api/v1/search_by_date?tags=story&page="+this.state.page)
+            this.page1()
+            fetch("https://hn.algolia.com/api/v1/search_by_date?tags=story&page="+this.state.page)
             .then(response => response.json())
             .then((responseJson)=> {
                 this.setState({
