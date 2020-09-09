@@ -24,7 +24,7 @@ export default class FirstScreen extends Component{
             .then(response => response.json())
             .then((responseJson)=> {
                 this.setState({
-                    data: responseJson.hits
+                    data: [...this.state.data,...responseJson.hits]
                 })
                // console.log(this.state.data)
             })
@@ -73,20 +73,21 @@ export default class FirstScreen extends Component{
             </View>
         )
     }
-handlemore=()=>{
-    this.setState(
-        {
-            page:this.state.page+1
-        },this.Api
-    )
-}
+// handlemore=()=>{
+//     this.setState(
+//         {
+//             page:this.state.page+1
+//         },this.Api
+//     )
+// }
 
 searchData() {
         const{text}=this.state
         const data2=this.state.data.filter((ele)=>{
             return(
             ele.title.toLowerCase().includes(text.toLowerCase())||
-            ele.author.toLowerCase().includes(text.toLowerCase())) 
+            ele.author.toLowerCase().includes(text.toLowerCase())
+            ) 
         })
         console.log("Data2 is",data2)
        this.props.navigation.navigate("ThirdScreen",
@@ -146,7 +147,7 @@ render(){
              data={this.state.data}
              renderItem={item => this.renderItem(item)}
              keyExtractor={item => item.id} 
-             onEndReached={this.handlemore}
+            // onEndReached={this.handlemore}
              />
       </View>
       </ScrollView>
